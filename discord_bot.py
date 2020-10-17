@@ -317,40 +317,6 @@ async def logs_error(ctx, error):
         await ctx.message.channel.send("I'm sure you were wrong, but I don't know where... ", delete_after=5)
 
 @client.command()
-async def smtp(ctx, arg1, arg2=None, arg3=None, arg4=None, arg5=None):
-
-    smtp_data = glob_path + str(ctx.author.id) + '/smtp.txt'
-    print(smtp_data)
-
-    async def set_smtp():
-
-        if arg1 == "set":
-            if not arg2:
-                await ctx.message.channel.send('Missing password.')
-            elif not arg3:
-                await ctx.message.channel.send('Missing email account.')
-            elif not arg4:
-                await ctx.message.channel.send('Missing SMTP server port.')
-            elif not arg5:
-                await ctx.message.channel.send('Missing SMTP server.')
-            else:
-                with open(smtp_data, 'w') as csv_file:
-                    csv_writer = csv.writer(csv_file)
-
-                    new_content = [arg2, arg3, arg4, arg5]
-                    print(new_content)
-                    csv_writer.writerows(new_content)
-                    csv_file.close()
-                print("Nince!")
-
-    if os.path.isdir(glob_path + str(ctx.author.id)):
-        set_smtp()
-
-    else:
-        os.mkdir(glob_path + str(ctx.author.id))
-        set_smtp()
-
-@client.command()
 async def help(ctx, arg=None):
 
     gif = "gif: send an mp4 or avi video file with /gif to convert it to a gif"
